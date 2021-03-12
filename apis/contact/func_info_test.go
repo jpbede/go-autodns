@@ -28,3 +28,18 @@ func TestClient_Info(t *testing.T) {
 	assert.NotNil(t, resp)
 	assert.Equal(t, "hello@example.com", resp.EMail)
 }
+
+func TestClient_Info_InvalidJson(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+		rw.Write([]byte("no json"))
+	}))
+
+	tc := transport.New(srv.URL)
+	tc.HTTPClient = srv.Client()
+	tc.Credentials = &transport.APICredentials{Username: "abc", Password: "abc123", Context: 1}
+	cl := contact.New(tc)
+
+	_, err := cl.Info(31364492, context.Background())
+	assert.Error(t, err)
+	assert.EqualError(t, err, "invalid character 'o' in literal null (expecting 'u')")
+}
