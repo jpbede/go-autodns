@@ -17,9 +17,11 @@ func TestClient_Create(t *testing.T) {
 		assert.Equal(t, "/contact", req.URL.String())
 		assert.Equal(t, http.MethodPost, req.Method)
 
-		bodyBytes, _ := ioutil.ReadAll(req.Body)
+		bodyBytes, err := ioutil.ReadAll(req.Body)
+		assert.NoError(t, err)
 		var cActual contact.Contact
-		json.Unmarshal(bodyBytes, &cActual)
+		err = json.Unmarshal(bodyBytes, &cActual)
+		assert.NoError(t, err)
 
 		cExpected := contact.Contact{
 			Type:      contact.ContactTypePerson,
@@ -58,4 +60,31 @@ func TestClient_Create(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, resp)
 	assert.Equal(t, "31364493", resp.Object.Value)
+}
+
+func TestClient_Create_InvalidJson(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+		rw.Write([]byte("no json"))
+	}))
+
+	tc := transport.New(srv.URL)
+	tc.HTTPClient = srv.Client()
+	tc.Credentials = &transport.APICredentials{Username: "abc", Password: "abc123", Context: 1}
+	cl := contact.New(tc)
+
+	c := contact.Contact{
+		Type:      contact.ContactTypePerson,
+		Firstname: "Max",
+		Lastname:  "Mustermann",
+		Address: []string{
+			"Musterstraße 4",
+		},
+		PostCode: "12345",
+		City:     "Musterhausen",
+		EMail:    "max@example.org",
+	}
+
+	_, err := cl.Create(c, context.Background())
+	assert.Error(t, err)
+	assert.EqualError(t, err, "invalid character 'o' in literal null (expecting 'u')")
 }
