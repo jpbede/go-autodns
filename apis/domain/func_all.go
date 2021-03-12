@@ -4,8 +4,8 @@ import (
 	"context"
 )
 
-func (c *client) All(ctx context.Context) ([]Domain, error) {
-	var out DomainResponse
+func (c *client) All(ctx context.Context) ([]*Domain, error) {
+	var out Response
 	if err := c.transport.Post(ctx, "/domain/_search", &out); err != nil {
 		return nil, err
 	}

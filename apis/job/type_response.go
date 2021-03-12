@@ -6,5 +6,5 @@ import "github.com/jpbede/go-autodns/internal/transport"
 type Response struct {
 	transport.BaseResponse
 
-	Data []Job
+	Data []*Job
 }

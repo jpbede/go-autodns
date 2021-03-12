@@ -10,7 +10,7 @@ import (
 // Client represents the functions implemented by this API
 type Client interface {
 	// All gets a list of all registered domains
-	All(ctx context.Context) ([]Domain, error)
+	All(ctx context.Context) ([]*Domain, error)
 
 	// Info gets information for a specific domain
 	Info(domain string, ctx context.Context) (*Domain, error)
@@ -40,7 +40,7 @@ type Client interface {
 	Transfer(domain Domain, ctx context.Context) (*job.Response, error)
 
 	// CreateAuthInfo1 creates an AuthInfo 1 for the specified domain.
-	CreateAuthInfo1(domain Domain, ctx context.Context) (*DomainResponse, error)
+	CreateAuthInfo1(domain Domain, ctx context.Context) (*Response, error)
 
 	// SendAuthInfo1ToOwnerC sends the AuthInfo 1 for the specified domain to the OwnerC
 	SendAuthInfo1ToOwnerC(domain Domain, ctx context.Context) (*transport.BaseResponse, error)

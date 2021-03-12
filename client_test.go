@@ -21,3 +21,11 @@ func TestClient_Contact(t *testing.T) {
 	contactAPI := c.Contact()
 	assert.NotNil(t, contactAPI)
 }
+
+func TestClient_Job(t *testing.T) {
+	c, err := autodns.New("abc", "abc-123", 1)
+	assert.NoError(t, err)
+
+	jobAPI := c.Job()
+	assert.NotNil(t, jobAPI)
+}
