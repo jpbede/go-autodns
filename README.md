@@ -4,8 +4,13 @@
 [![codecov](https://codecov.io/gh/jpbede/go-autodns/branch/main/graph/badge.svg?token=ACJ41YHXN1)](https://codecov.io/gh/jpbede/go-autodns)
 ![test](https://github.com/jpbede/go-autodns/workflows/test/badge.svg)
 
-## Usage
+## Installation
+Install using go get:
+```shell
+go get github.com/jpbede/go-autodns
+```
 
+## Usage
 Import the lib as usual
 ```go
 import "github.com/jpbede/go-autodns"
@@ -15,4 +20,5 @@ Create a new client without options:
 ```go
 autodnsClient, err := autodns.New("username", "password", 1) // change 1 with your context number
 ```
-
+The client now offers more specific sub-clients, for example for managing contacts or domains.
+For more information have a look at the [documentation](https://pkg.go.dev/github.com/jpbede/go-autodns).
