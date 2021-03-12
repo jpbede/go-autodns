@@ -46,7 +46,8 @@ func TestClient_Create(t *testing.T) {
 			0x33, 0x33, 0x38, 0x34, 0x7d, 0x5d, 0x7d})
 	}))
 
-	transportC := transport.NewClient(srv.URL, srv.Client())
+	transportC := transport.New(srv.URL)
+	transportC.HTTPClient = srv.Client()
 	transportC.Credentials = &transport.APICredentials{Username: "abc", Password: "abc123", Context: 1}
 	cl := domain.New(transportC)
 
