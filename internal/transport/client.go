@@ -101,6 +101,7 @@ func (c *Client) doRequest(ctx context.Context, method string, path string, out 
 		c.logger.
 			WithLevel(zerolog.DebugLevel).
 			RawJSON("response", bodyBytes).
+			//Bytes("response", bodyBytes).
 			Msg("autodns_response")
 
 		// reset body
