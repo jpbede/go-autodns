@@ -1,30 +1,34 @@
 package transport
 
+type ResponseStatus struct {
+	Code string `json:"code"`
+	Text string `json:"text"`
+	Type string `json:"type"`
+}
+
+type ResponseObject struct {
+	Type    string `json:"type"`
+	Value   string `json:"value"`
+	Summary int    `json:"summary"`
+}
+
+type MessageObject struct {
+	Type  string `json:"type"`
+	Value string `json:"value"`
+}
+
+type Message struct {
+	Text     string          `json:"text"`
+	Messages []string        `json:"messages"`
+	Objects  []MessageObject `json:"objects"`
+	Code     string          `json:"code"`
+	Status   string          `json:"status"`
+}
+
 type BaseResponse struct {
-	StID string `json:"stid"`
-
-	/*Messages []struct {
-	  Text     string        `json:"text"`
-	  Messages []interface{} `json:"messages"`
-	  Objects  []struct {
-	    Type  string `json:"type"`
-	    Value string `json:"value"`
-	  } `json:"objects"`
-	  Code   string `json:"code"`
-	  Status string `json:"status"`
-	} `json:"messages"`*/
-	Status struct {
-		Code string `json:"code"`
-		Text string `json:"text"`
-		Type string `json:"type"`
-	} `json:"status"`
-	Object struct {
-		Type    string `json:"type"`
-		Value   string `json:"value"`
-		Summary int    `json:"summary"`
-		Data    struct {
-		} `json:"data"`
-	} `json:"object"`
-
-	//CtID string `json:"ctid"`
+	StID     string         `json:"stid"`
+	Messages []Message      `json:"messages"`
+	Status   ResponseStatus `json:"status"`
+	Object   ResponseObject `json:"object"`
+	CtID     string         `json:"ctid"`
 }

@@ -12,6 +12,6 @@ func TestClient_Stat(t *testing.T) {
 
 	statAPI := c.Domain()
 	if statAPI == nil {
-		t.Error("Failed to get 'Stat' endpoint")
+		t.Error("Failed to get 'Domain' endpoint")
 	}
 }

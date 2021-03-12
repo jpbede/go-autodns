@@ -56,7 +56,7 @@ func (c *Client) Patch(ctx context.Context, path string, out interface{}, opts .
 
 // Delete executes a DELETE request
 func (c *Client) Delete(ctx context.Context, path string, out interface{}, opts ...RequestOption) error {
-	return c.doRequest(ctx, http.MethodPatch, path, out, opts...)
+	return c.doRequest(ctx, http.MethodDelete, path, out, opts...)
 }
 
 // doRequest does the actual request
@@ -77,6 +77,8 @@ func (c *Client) doRequest(ctx context.Context, method string, path string, out 
 	req.SetBasicAuth(c.Credentials.Username, c.Credentials.Password)
 	req.Header.Add("X-Domainrobot-Context", strconv.Itoa(c.Credentials.Context))
 
+	req.Header.Set("User-Agent", "go-autodns/0.0.0")
+
 	// run options
 	for i := range opts {
 		if err := opts[i](req); err != nil {
@@ -91,7 +93,7 @@ func (c *Client) doRequest(ctx context.Context, method string, path string, out 
 		return err
 	}
 
-	if res.StatusCode != 200 {
+	if res.StatusCode < 200 || res.StatusCode > 299 {
 		bytes, _ := ioutil.ReadAll(res.Body)
 		return errors.New(string(bytes))
 	}
