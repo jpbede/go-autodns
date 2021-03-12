@@ -13,14 +13,13 @@ type ClientOption func(*Client)
 func WithAPIEndpoint(api APIEndpoint) ClientOption {
 	return func(c *Client) {
 		c.transport.BaseURL = string(api)
-		c.transport = transport.NewClient(string(api), nil)
 	}
 }
 
 // WithHTTPClient supplies a already created http.Client
 func WithHTTPClient(httpClient *http.Client) ClientOption {
 	return func(c *Client) {
-		c.transport = transport.NewClient(c.transport.BaseURL, httpClient)
+		c.transport.HTTPClient = httpClient
 	}
 }
 

@@ -16,20 +16,15 @@ import (
 type Client struct {
 	BaseURL     string
 	Credentials *APICredentials
-
-	httpClient *http.Client
-	logger     *zerolog.Logger
+	HTTPClient  *http.Client
+	logger      *zerolog.Logger
 }
 
-// NewClient returns a new Transport HTTP client
-func NewClient(baseURL string, hc *http.Client) *Client {
-	if hc == nil {
-		hc = &http.Client{}
-	}
-
+// New returns a new Transport HTTP client
+func New(baseURL string) *Client {
 	c := Client{
 		BaseURL:    baseURL,
-		httpClient: hc,
+		HTTPClient: http.DefaultClient,
 	}
 	return &c
 }
@@ -70,7 +65,7 @@ func (c *Client) doRequest(ctx context.Context, method string, path string, out 
 
 	// add client logger if zerolog logger is there
 	if c.logger != nil {
-		c.httpClient.Transport = &ClientLogging{Logger: c.logger}
+		c.HTTPClient.Transport = &ClientLogging{Logger: c.logger}
 	}
 
 	// add auth headers
@@ -88,7 +83,7 @@ func (c *Client) doRequest(ctx context.Context, method string, path string, out 
 	req = req.WithContext(ctx)
 
 	// run request
-	res, err := c.httpClient.Do(req)
+	res, err := c.HTTPClient.Do(req)
 	if err != nil {
 		return err
 	}

@@ -12,11 +12,11 @@ type APIEndpoint string
 const (
 	// APIEndpointProduction Production API endpoint
 	APIEndpointProduction APIEndpoint = "https://api.autodns.com/v1"
-	// APIEndpointBeta Beta API endpoint
+	// APIEndpointDemo Demo API endpoint
 	APIEndpointDemo APIEndpoint = "https://api.demo.autodns.com/v1"
 )
 
-// New creates a new Client with APIUrl and APIKey
+// New creates a new Client with username, password and context
 func New(username, password string, context int) (*Client, error) {
 	return NewWithOptions(WithAPIEndpoint(APIEndpointProduction), WithCredentials(username, password, context))
 }
@@ -31,14 +31,14 @@ func NewWithOptions(options ...ClientOption) (*Client, error) {
 	c := &Client{}
 
 	// always create a base transport it can be overwritten with options
-	c.transport = transport.NewClient(string(APIEndpointProduction), nil)
+	c.transport = transport.New(string(APIEndpointProduction))
 
 	// run given options
 	for _, option := range options {
 		option(c)
 	}
 
-	// check if there are credentials and then login
+	// check if there are credentials
 	if !c.transport.HasCredentials() {
 		return nil, errors.New("no api credentials supplied")
 	}
