@@ -10,3 +10,9 @@ Import the lib as usual
 ```go
 import "github.com/jpbede/go-autodns"
 ```
+
+Create a new client without options:
+```go
+autodnsClient, err := autodns.New("username", "password", 1) // change 1 with your context number
+```
+

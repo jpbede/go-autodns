@@ -6,12 +6,18 @@ import (
 	"testing"
 )
 
-func TestClient_Stat(t *testing.T) {
+func TestClient_Domain(t *testing.T) {
 	c, err := autodns.New("abc", "abc-123", 1)
 	assert.NoError(t, err)
 
-	statAPI := c.Domain()
-	if statAPI == nil {
-		t.Error("Failed to get 'Domain' endpoint")
-	}
+	domainAPI := c.Domain()
+	assert.NotNil(t, domainAPI)
+}
+
+func TestClient_Contact(t *testing.T) {
+	c, err := autodns.New("abc", "abc-123", 1)
+	assert.NoError(t, err)
+
+	contactAPI := c.Contact()
+	assert.NotNil(t, contactAPI)
 }

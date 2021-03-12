@@ -1,6 +1,7 @@
 package transport
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
@@ -12,7 +13,7 @@ import (
 	"strings"
 )
 
-// Client is the http transport client for netpalm. It handles the authentication
+// Client is the http transport client. It handles the authentication
 type Client struct {
 	BaseURL     string
 	Credentials *APICredentials
@@ -91,6 +92,19 @@ func (c *Client) doRequest(ctx context.Context, method string, path string, out 
 	if res.StatusCode < 200 || res.StatusCode > 299 {
 		bytes, _ := ioutil.ReadAll(res.Body)
 		return errors.New(string(bytes))
+	}
+
+	// if there is a logger, spill out the response json
+	if c.logger != nil {
+		bodyBytes, _ := ioutil.ReadAll(res.Body)
+
+		c.logger.
+			WithLevel(zerolog.DebugLevel).
+			RawJSON("response", bodyBytes).
+			Msg("autodns_response")
+
+		// reset body
+		res.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 	}
 
 	// marshal response to given interface
