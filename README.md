@@ -4,6 +4,8 @@
 [![codecov](https://codecov.io/gh/jpbede/go-autodns/branch/main/graph/badge.svg?token=ACJ41YHXN1)](https://codecov.io/gh/jpbede/go-autodns)
 ![test](https://github.com/jpbede/go-autodns/workflows/test/badge.svg)
 
+This repository contains a Go package for accessing the [InternetX AutoDNS JSON API](https://help.internetx.com/display/APIXMLDE/API-Grundlagen+JSON).
+
 ## Installation
 Install using go get:
 ```shell
