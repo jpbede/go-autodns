@@ -43,3 +43,21 @@ func TestClient_Info_InvalidJson(t *testing.T) {
 	assert.Error(t, err)
 	assert.EqualError(t, err, "invalid character 'o' in literal null (expecting 'u')")
 }
+
+func TestClient_Info_NoData(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+		assert.Equal(t, "/contact/31364475", req.URL.String())
+		assert.Equal(t, http.MethodGet, req.Method)
+
+		rw.Write([]byte("{\"stid\":\"20210312-app1-demo-55474\",\"status\":{\"code\":\"S0304\",\"text\":\"Die Daten des Domain-Kontaktes wurden erfolgreich ermittelt.\",\"type\":\"SUCCESS\"},\"object\":{\"type\":\"Contact\",\"value\":\"31364475\"},\"data\":[]}"))
+	}))
+
+	tc := transport.New(srv.URL)
+	tc.HTTPClient = srv.Client()
+	tc.Credentials = &transport.APICredentials{Username: "abc", Password: "abc123", Context: 1}
+	cl := contact.New(tc)
+
+	_, err := cl.Info(31364475, context.Background())
+	assert.Error(t, err)
+	assert.EqualError(t, err, "no contact found")
+}

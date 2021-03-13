@@ -13,7 +13,6 @@ func (c *client) Info(domain string, ctx context.Context) (*Domain, error) {
 	}
 	if len(out.Data) > 0 {
 		return out.Data[0], nil
-	} else {
-		return nil, errors.New("no domain found")
 	}
+	return nil, errors.New("no domain found")
 }

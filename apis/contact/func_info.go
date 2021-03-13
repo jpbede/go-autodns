@@ -14,7 +14,6 @@ func (c *client) Info(contactID int, ctx context.Context) (*Contact, error) {
 	}
 	if len(out.Data) > 0 {
 		return &out.Data[0], nil
-	} else {
-		return nil, errors.New("no domain found")
 	}
+	return nil, errors.New("no contact found")
 }
