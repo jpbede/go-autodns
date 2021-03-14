@@ -4,6 +4,7 @@ import (
 	"github.com/jpbede/go-autodns/apis/contact"
 	"github.com/jpbede/go-autodns/apis/domain"
 	"github.com/jpbede/go-autodns/apis/job"
+	"github.com/jpbede/go-autodns/apis/zone"
 	"github.com/jpbede/go-autodns/internal/transport"
 )
 
@@ -14,6 +15,7 @@ type Client struct {
 	contact contact.Client
 	domain  domain.Client
 	job     job.Client
+	zone    zone.Client
 }
 
 // Contact returns a client related to contact operations
@@ -41,4 +43,13 @@ func (c *Client) Job() job.Client {
 	}
 
 	return c.job
+}
+
+// Zone returns a client related to zone operations
+func (c *Client) Zone() zone.Client {
+	if c.zone == nil {
+		c.zone = zone.New(c.transport)
+	}
+
+	return c.zone
 }
