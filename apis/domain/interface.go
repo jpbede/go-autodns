@@ -31,7 +31,10 @@ type Client interface {
 	UpdateRegistryStatus(domain Domain, regStatus RegistryStatus, ctx context.Context) (*job.Response, error)
 
 	// Cancel cancels a domain
-	//Cancel(domain Domain, ctx context.Context) error
+	Cancel(domain Domain, ctx context.Context) (*Cancellation, error)
+
+	// DeleteCancellation gets all existing cancellations
+	GetCancellations(ctx context.Context) ([]*Cancellation, error)
 
 	// DeleteCancellation removes a existing cancellation for a domain
 	DeleteCancellation(domain string, ctx context.Context) (*transport.BaseResponse, error)
