@@ -1,6 +1,6 @@
 package domain
 
-import "github.com/jpbede/go-autodns/internal/transport"
+import "go.bnck.me/autodns/internal/transport"
 
 // Response response of the /domain endpoints
 type Response struct {

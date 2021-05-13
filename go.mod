@@ -1,4 +1,4 @@
-module github.com/jpbede/go-autodns
+module go.bnck.me/autodns
 
 go 1.15
 

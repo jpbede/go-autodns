@@ -1,6 +1,6 @@
 package job
 
-import "github.com/jpbede/go-autodns/internal/transport"
+import "go.bnck.me/autodns/internal/transport"
 
 // ObjectJobResponse represents a ObjectJob responses given by async tasks
 type ObjectJobResponse struct {

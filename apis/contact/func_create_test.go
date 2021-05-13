@@ -3,9 +3,9 @@ package contact_test
 import (
 	"context"
 	"encoding/json"
-	"github.com/jpbede/go-autodns/apis/contact"
-	"github.com/jpbede/go-autodns/internal/transport"
 	"github.com/stretchr/testify/assert"
+	"go.bnck.me/autodns/apis/contact"
+	"go.bnck.me/autodns/internal/transport"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"

@@ -1,7 +1,7 @@
 package zone
 
 import (
-	"github.com/jpbede/go-autodns/apis/domain"
+	"go.bnck.me/autodns/apis/domain"
 	"time"
 )
 

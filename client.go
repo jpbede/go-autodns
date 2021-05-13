@@ -1,11 +1,11 @@
-package autodns
+package autodns // import "go.bnck.me/autodns"
 
 import (
-	"github.com/jpbede/go-autodns/apis/contact"
-	"github.com/jpbede/go-autodns/apis/domain"
-	"github.com/jpbede/go-autodns/apis/job"
-	"github.com/jpbede/go-autodns/apis/zone"
-	"github.com/jpbede/go-autodns/internal/transport"
+	"go.bnck.me/autodns/apis/contact"
+	"go.bnck.me/autodns/apis/domain"
+	"go.bnck.me/autodns/apis/job"
+	"go.bnck.me/autodns/apis/zone"
+	"go.bnck.me/autodns/internal/transport"
 )
 
 // Client represents the main client

@@ -1,7 +1,7 @@
 package zone
 
 import (
-	"github.com/jpbede/go-autodns/internal/transport"
+	"go.bnck.me/autodns/internal/transport"
 )
 
 type client struct {

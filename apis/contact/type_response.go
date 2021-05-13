@@ -1,6 +1,6 @@
 package contact
 
-import "github.com/jpbede/go-autodns/internal/transport"
+import "go.bnck.me/autodns/internal/transport"
 
 // Response response of the /contact endpoints
 type Response struct {

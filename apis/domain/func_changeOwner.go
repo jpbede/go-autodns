@@ -2,9 +2,9 @@ package domain
 
 import (
 	"context"
-	"github.com/jpbede/go-autodns/apis/contact"
-	"github.com/jpbede/go-autodns/apis/job"
-	"github.com/jpbede/go-autodns/internal/transport"
+	"go.bnck.me/autodns/apis/contact"
+	"go.bnck.me/autodns/apis/job"
+	"go.bnck.me/autodns/internal/transport"
 )
 
 func (c *client) ChangeOwner(domain Domain, ownerC *contact.Contact, ctx context.Context) (*job.Response, error) {

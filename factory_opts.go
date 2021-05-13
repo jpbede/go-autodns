@@ -1,8 +1,8 @@
 package autodns
 
 import (
-	"github.com/jpbede/go-autodns/internal/transport"
 	"github.com/rs/zerolog"
+	"go.bnck.me/autodns/internal/transport"
 	"net/http"
 )
 

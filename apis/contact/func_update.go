@@ -2,8 +2,8 @@ package contact
 
 import (
 	"context"
-	"github.com/jpbede/go-autodns/apis/job"
-	"github.com/jpbede/go-autodns/internal/transport"
+	"go.bnck.me/autodns/apis/job"
+	"go.bnck.me/autodns/internal/transport"
 	"strconv"
 )
 

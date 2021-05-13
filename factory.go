@@ -2,7 +2,7 @@ package autodns
 
 import (
 	"errors"
-	"github.com/jpbede/go-autodns/internal/transport"
+	"go.bnck.me/autodns/internal/transport"
 	"net/http"
 )
 

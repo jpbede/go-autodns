@@ -3,7 +3,7 @@ package domain
 import (
 	"context"
 	"errors"
-	"github.com/jpbede/go-autodns/internal/transport"
+	"go.bnck.me/autodns/internal/transport"
 )
 
 func (c *client) Cancel(domain Domain, ctx context.Context) (*Cancellation, error) {

@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"github.com/jpbede/go-autodns/apis/contact"
+	"go.bnck.me/autodns/apis/contact"
 	"net"
 )
 

@@ -2,7 +2,7 @@ package domain
 
 import (
 	"context"
-	"github.com/jpbede/go-autodns/internal/transport"
+	"go.bnck.me/autodns/internal/transport"
 )
 
 func (c *client) SendAuthInfo1ToOwnerC(domain Domain, ctx context.Context) (*transport.BaseResponse, error) {

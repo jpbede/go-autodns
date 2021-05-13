@@ -1,8 +1,8 @@
 package autodns_test
 
 import (
-	"github.com/jpbede/go-autodns"
 	"github.com/stretchr/testify/assert"
+	"go.bnck.me/autodns"
 	"net/http"
 	"testing"
 )
